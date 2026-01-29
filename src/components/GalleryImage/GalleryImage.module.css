@@ -1,0 +1,137 @@
+.container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    /* Matched to visual ~20px */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #F8F9FA;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #F8F9FA;
+    background-image:
+        linear-gradient(#E6E8EC 1px, transparent 1px),
+        linear-gradient(90deg, #E6E8EC 1px, transparent 1px);
+    background-size: 16px 16px;
+    z-index: 0;
+}
+
+/* Variants Sizes */
+/* Based on visual scale */
+.small,
+.small-cancel {
+    width: 200px;
+    height: 120px;
+}
+
+.medium {
+    width: 250px;
+    height: 150px;
+}
+
+.high,
+.high-cancel {
+    width: 250px;
+    height: 200px;
+}
+
+/* Specifically for 'square' or Lado Izquierdo example which looks smaller/squarer */
+.square-cancel {
+    width: 150px;
+    height: 150px;
+}
+
+/* Delete Button (Top Right) */
+.deleteButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 0;
+    transition: transform 0.15s ease;
+}
+
+.deleteButton:hover {
+    transform: scale(1.1);
+}
+
+/* Bottom Bar */
+.bottomBar {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    /* Inner radius */
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    height: 48px;
+    /* Fixed height for the bar */
+    box-sizing: border-box;
+}
+
+.label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1F2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+}
+
+.viewButton {
+    background-color: #004EC9;
+    /* Primary Blue from visual */
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    /* Small circle button */
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 0;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+}
+
+.viewButton:hover {
+    background-color: #003A96;
+}

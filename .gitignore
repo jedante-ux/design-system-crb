@@ -30,3 +30,5 @@ CREDENTIALS.md
 .env.production
 *.pem
 *.key
+
+accesos.md

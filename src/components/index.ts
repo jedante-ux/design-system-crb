@@ -17,3 +17,4 @@ export * from './StepItem';
 export * from './MenuItem';
 export * from './MenuAccordion';
 export * from './Sidebar';
+export * from './GalleryImage';

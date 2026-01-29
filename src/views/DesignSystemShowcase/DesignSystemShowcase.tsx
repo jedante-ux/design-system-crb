@@ -21,9 +21,10 @@ import {
   LogoIcon,
   Icon,
   Sidebar,
-  
+
   MenuItem,
   MenuAccordion,
+  GalleryImage,
 } from '../../components';
 import type { IconName } from '../../components/Icon/Icon';
 import styles from './DesignSystemShowcase.module.css';
@@ -55,7 +56,7 @@ function CodeBlock({ code, title = 'Usage' }: CodeBlockProps) {
   );
 }
 
-type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch' | 'breadcrumbs' | 'headerstepper';
+type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch' | 'breadcrumbs' | 'headerstepper' | 'galleryimage';
 
 interface NavMenuItem {
   key: ComponentKey;
@@ -132,6 +133,14 @@ const menuCategories: MenuCategory[] = [
     icon: 'settings',
     items: [
       { key: 'croquis', label: 'Croquis Builder', implemented: true },
+    ],
+  },
+  {
+    id: 'media',
+    label: 'Media',
+    icon: 'eye-open',
+    items: [
+      { key: 'galleryimage', label: 'Gallery Image', implemented: true },
     ],
   },
 ];
@@ -496,8 +505,8 @@ function NavbarShowcase() {
                 <ActionButton
                   icon={
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M12 1v6m0 6v6M1 12h6m6 0h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+                      <path d="M12 1v6m0 6v6M1 12h6m6 0h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   }
                   onClick={() => console.log('settings')}
@@ -1947,6 +1956,120 @@ function PlaceholderShowcase({ name }: { name: string }) {
   );
 }
 
+function GalleryImageShowcase() {
+  const usageCode = `import { GalleryImage } from '@/components';
+
+// Small
+<GalleryImage status="small" src="image.jpg" />
+
+// Medium
+<GalleryImage status="medium" src="image.jpg" />
+
+// High
+<GalleryImage status="high" src="image.jpg" />
+
+// With Cancel/Delete
+<GalleryImage 
+  status="small-cancel" 
+  src="image.jpg" 
+  onDelete={() => console.log('deleted')} 
+/>
+
+// With View Action
+<GalleryImage 
+  status="medium" 
+  src="image.jpg" 
+  onView={() => console.log('view')} 
+/>`;
+
+  const placeholderImage = "https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80";
+
+  return (
+    <div className={styles.componentShowcase}>
+      <h1 className={styles.componentTitle}>Gallery Image</h1>
+      <p className={styles.componentDescription}>
+        Componente para visualizar imagenes en galerias con diferentes tamaños y opciones de eliminar.
+        Basado en el componente "Gallery-image" de Figma.
+      </p>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Variantes de Tamaño</h2>
+        <div className={styles.previewBox}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' }}>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>Small (Status=small)</span>
+              <GalleryImage status="small" src={placeholderImage} label="Lado Izquierdo" />
+            </div>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>Medium (Status=Medium)</span>
+              <GalleryImage status="medium" src={placeholderImage} label="Nombre de foto" />
+            </div>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>High (Status=High)</span>
+              <GalleryImage status="high" src={placeholderImage} label="Documento Frontal" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Variantes con Cancelar</h2>
+        <p className={styles.sectionDescription}>Incluyen botón de eliminar/cancelar en la esquina superior derecha</p>
+        <div className={styles.previewBox}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' }}>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>Small Cancel</span>
+              <GalleryImage
+                status="small-cancel"
+                src={placeholderImage}
+                label="Lado Izquierdo"
+                onDelete={() => alert('Delete clicked')}
+              />
+            </div>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>Square Cancel</span>
+              <GalleryImage
+                status="square-cancel"
+                src={placeholderImage}
+                label="Foto Evidencia"
+                onDelete={() => alert('Delete clicked')}
+              />
+            </div>
+            <div className={styles.previewItem}>
+              <span className={styles.stateLabel}>High Cancel</span>
+              <GalleryImage
+                status="high-cancel"
+                src={placeholderImage}
+                label="Documento Reverso"
+                onDelete={() => alert('Delete clicked')}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Interacción</h2>
+        <p className={styles.sectionDescription}>Hover para ver acciones (Delete y View)</p>
+        <div className={styles.previewBox}>
+          <div className={styles.previewItem}>
+            <span className={styles.stateLabel}>With View Action</span>
+            <GalleryImage
+              status="medium"
+              src={placeholderImage}
+              label="Tarjeta Circulación"
+              onView={() => alert('View clicked')}
+              onDelete={() => alert('Delete clicked')}
+            />
+          </div>
+        </div>
+      </section>
+
+      <CodeBlock code={usageCode} />
+    </div>
+  );
+}
+
 export function DesignSystemShowcase() {
   const [activeComponent, setActiveComponent] = useState<ComponentKey>('guidelines');
 
@@ -1980,6 +2103,8 @@ export function DesignSystemShowcase() {
         return <BreadcrumbsShowcase />;
       case 'headerstepper':
         return <HeaderStepperShowcase />;
+      case 'galleryimage':
+        return <GalleryImageShowcase />;
       default:
         // Find label from all categories
         const allItems = menuCategories.flatMap(cat => cat.items);
@@ -2005,6 +2130,7 @@ export function DesignSystemShowcase() {
       'croquis': 'edit-01',
       'breadcrumbs': 'arrow-right',
       'headerstepper': 'chevron-down',
+      'galleryimage': 'eye-open',
     };
     return iconMap[key] || 'star-01';
   };
@@ -2015,7 +2141,7 @@ export function DesignSystemShowcase() {
         logo={
           <div className={styles.sidebarLogo}>
             <svg width="20" height="22" viewBox="0 0 148 159" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 79.1954C0 35.3714 32.9876 0 84.8026 0C109.603 0 128.786 6.66308 146.031 23.8728C148.84 26.5761 148.563 29.6221 145.715 32.3254L116.208 61.3384C113.4 64.0417 110.235 63.7751 107.427 60.4246C101.455 53.7615 94.8492 51.6674 86.0683 51.6674C70.682 51.6674 60.0026 63.7751 60.0026 79.1954C60.0026 94.6157 70.682 107.295 86.0683 107.295C94.8492 107.295 101.455 104.858 107.427 98.2328C110.235 94.9203 113.4 94.6157 116.208 97.319L145.715 126.332C148.523 129.035 148.84 132.081 145.715 135.089C128.746 152.032 109.286 159 84.763 159C32.948 159 0 123.324 0 79.1954Z" fill="white"/>
+              <path d="M0 79.1954C0 35.3714 32.9876 0 84.8026 0C109.603 0 128.786 6.66308 146.031 23.8728C148.84 26.5761 148.563 29.6221 145.715 32.3254L116.208 61.3384C113.4 64.0417 110.235 63.7751 107.427 60.4246C101.455 53.7615 94.8492 51.6674 86.0683 51.6674C70.682 51.6674 60.0026 63.7751 60.0026 79.1954C60.0026 94.6157 70.682 107.295 86.0683 107.295C94.8492 107.295 101.455 104.858 107.427 98.2328C110.235 94.9203 113.4 94.6157 116.208 97.319L145.715 126.332C148.523 129.035 148.84 132.081 145.715 135.089C128.746 152.032 109.286 159 84.763 159C32.948 159 0 123.324 0 79.1954Z" fill="white" />
             </svg>
           </div>
         }
@@ -2025,7 +2151,7 @@ export function DesignSystemShowcase() {
             key={category.id}
             title={category.label}
             icon={<Icon name={category.icon} size={24} />}
-            
+
           >
             {category.items.map((item) => (
               <MenuItem
