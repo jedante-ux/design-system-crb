@@ -565,6 +565,9 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
   const [streetType, setStreetType] = useState<StreetType>('cruz');
   const [elements, setElements] = useState<PlacedElement[]>([]);
   const [activeElementType, setActiveElementType] = useState<'car' | 'truck' | 'motorcycle' | 'pedestrian' | null>(null);
+  const [generatedSvg, setGeneratedSvg] = useState<string | null>(null);
+  const [savedElements, setSavedElements] = useState<PlacedElement[]>([]);
+  const [savedStreetType, setSavedStreetType] = useState<StreetType>('cruz');
 
   const handleCreateCroquis = () => {
     setIsTransitioning(true);
@@ -746,20 +749,17 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
       </svg>
     `;
 
-    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
+    // Save current state before generating
+    setSavedElements(elements);
+    setSavedStreetType(streetType);
 
+    // Store SVG content as data URL
+    const svgDataUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgContent)))}`;
+    setGeneratedSvg(svgDataUrl);
+
+    // Call onGenerate if provided
     if (onGenerate) {
-      onGenerate(url);
-    } else {
-      // Default behavior: download the SVG
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'croquis.svg';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      onGenerate(svgDataUrl);
     }
   }, [streetType, elements, onGenerate]);
 
@@ -767,10 +767,65 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
     setElements([]);
     setStreetType('cruz');
     setIsBuilderActive(false);
+    setGeneratedSvg(null);
     if (onCancel) {
       onCancel();
     }
   };
+
+  const handleRestore = () => {
+    // Reset to initial state
+    setElements([]);
+    setStreetType('cruz');
+    setGeneratedSvg(null);
+    setSavedElements([]);
+    setSavedStreetType('cruz');
+  };
+
+  const handleEdit = () => {
+    // Return to editing mode with saved elements
+    setElements(savedElements);
+    setStreetType(savedStreetType);
+    setGeneratedSvg(null);
+  };
+
+  const handleDownload = () => {
+    if (!generatedSvg) return;
+
+    const link = document.createElement('a');
+    link.href = generatedSvg;
+    link.download = 'croquis.svg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Generated SVG view
+  if (generatedSvg) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.generatedView}>
+          <div className={styles.generatedHeader}>
+            <h3 className={styles.generatedTitle}>Croquis Generado</h3>
+            <div className={styles.generatedActions}>
+              <button className={styles.restoreButton} onClick={handleRestore}>
+                Restaurar
+              </button>
+              <button className={styles.editButton} onClick={handleEdit}>
+                Editar
+              </button>
+              <button className={styles.downloadButton} onClick={handleDownload}>
+                Descargar
+              </button>
+            </div>
+          </div>
+          <div className={styles.generatedContent}>
+            <img src={generatedSvg} alt="Croquis generado" className={styles.generatedImage} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Placeholder view
   if (!isBuilderActive) {

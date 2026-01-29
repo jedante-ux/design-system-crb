@@ -714,3 +714,98 @@
 .generateBtn:hover {
   background-color: #003A96;
 }
+
+/* Generated View */
+.generatedView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.generatedHeader {
+  padding: 16px;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid #E6E8EC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.generatedTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #202236;
+  margin: 0;
+}
+
+.generatedActions {
+  display: flex;
+  gap: 8px;
+}
+
+.restoreButton,
+.editButton,
+.downloadButton {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.restoreButton {
+  background-color: #FFFFFF;
+  color: #DC2626;
+  border-color: #DC2626;
+}
+
+.restoreButton:hover {
+  background-color: #FEF2F2;
+}
+
+.editButton {
+  background-color: #FFFFFF;
+  color: #004EC9;
+  border-color: #004EC9;
+}
+
+.editButton:hover {
+  background-color: #F0F7FF;
+}
+
+.downloadButton {
+  background-color: #004EC9;
+  color: #FFFFFF;
+  border-color: #004EC9;
+}
+
+.downloadButton:hover {
+  background-color: #003A96;
+}
+
+.generatedContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #FAFAFA;
+  overflow: auto;
+}
+
+.generatedImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+}
