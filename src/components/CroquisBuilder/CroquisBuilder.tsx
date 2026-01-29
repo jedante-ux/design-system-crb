@@ -565,7 +565,6 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
   const [streetType, setStreetType] = useState<StreetType>('cruz');
   const [elements, setElements] = useState<PlacedElement[]>([]);
   const [activeElementType, setActiveElementType] = useState<'car' | 'truck' | 'motorcycle' | 'pedestrian' | null>(null);
-  const canvasWrapperRef = useRef<HTMLDivElement>(null);
 
   const handleCreateCroquis = () => {
     setIsTransitioning(true);
@@ -675,7 +674,6 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
       const color = element.owner ? ownerColors[element.owner] : elementColors[element.type];
       const darkerColor = color === '#004EC9' ? '#003A96' : color === '#9CA3AF' ? '#6B7280' : '#1E8449';
 
-      const vehicleSize = 36;
       const transform = `translate(${element.x}, ${element.y}) rotate(${element.rotation})`;
 
       switch (element.type) {
