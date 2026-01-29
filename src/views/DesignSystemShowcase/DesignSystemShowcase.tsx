@@ -21,8 +21,9 @@ import {
   LogoIcon,
   Icon,
   Sidebar,
-  MenuGroup,
+  
   MenuItem,
+  MenuAccordion,
 } from '../../components';
 import type { IconName } from '../../components/Icon/Icon';
 import styles from './DesignSystemShowcase.module.css';
@@ -54,7 +55,7 @@ function CodeBlock({ code, title = 'Usage' }: CodeBlockProps) {
   );
 }
 
-type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch';
+type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch' | 'breadcrumbs' | 'headerstepper';
 
 interface NavMenuItem {
   key: ComponentKey;
@@ -62,19 +63,79 @@ interface NavMenuItem {
   implemented: boolean;
 }
 
-const menuItems: NavMenuItem[] = [
-  { key: 'guidelines', label: 'Design Guidelines', implemented: true },
-  { key: 'colors', label: 'Color Palette', implemented: true },
-  { key: 'logo', label: 'Logo', implemented: true },
-  { key: 'icon', label: 'Icon', implemented: true },
-  { key: 'button', label: 'Buttons & Inputs', implemented: true },
-  { key: 'navbar', label: 'Navbar', implemented: true },
-  { key: 'stepper', label: 'Stepper', implemented: true },
-  { key: 'header', label: 'Header', implemented: true },
-  { key: 'alert', label: 'Alert Message', implemented: true },
-  { key: 'filter', label: 'Filter Button', implemented: true },
-  { key: 'branch', label: 'Branch Info', implemented: true },
-  { key: 'croquis', label: 'Croquis Builder', implemented: true },
+interface MenuCategory {
+  id: string;
+  label: string;
+  icon: IconName;
+  defaultOpen?: boolean;
+  items: NavMenuItem[];
+}
+
+const menuCategories: MenuCategory[] = [
+  {
+    id: 'fundamentals',
+    label: 'Fundamentos',
+    icon: 'file',
+    defaultOpen: true,
+    items: [
+      { key: 'guidelines', label: 'Design Guidelines', implemented: true },
+      { key: 'colors', label: 'Color Palette', implemented: true },
+    ],
+  },
+  {
+    id: 'branding',
+    label: 'Branding',
+    icon: 'star-01',
+    items: [
+      { key: 'logo', label: 'Logo', implemented: true },
+      { key: 'icon', label: 'Icon', implemented: true },
+    ],
+  },
+  {
+    id: 'forms',
+    label: 'Formularios',
+    icon: 'edit-01',
+    items: [
+      { key: 'button', label: 'Buttons & Inputs', implemented: true },
+      { key: 'filter', label: 'Filter Button', implemented: true },
+    ],
+  },
+  {
+    id: 'navigation',
+    label: 'Navegación',
+    icon: 'menu-01',
+    items: [
+      { key: 'navbar', label: 'Navbar', implemented: true },
+      { key: 'header', label: 'Header', implemented: true },
+      { key: 'breadcrumbs', label: 'Breadcrumbs', implemented: true },
+      { key: 'headerstepper', label: 'Header Stepper', implemented: true },
+      { key: 'stepper', label: 'Stepper', implemented: true },
+    ],
+  },
+  {
+    id: 'feedback',
+    label: 'Feedback',
+    icon: 'bell-01',
+    items: [
+      { key: 'alert', label: 'Alert Message', implemented: true },
+    ],
+  },
+  {
+    id: 'data',
+    label: 'Información',
+    icon: 'folder',
+    items: [
+      { key: 'branch', label: 'Branch Info', implemented: true },
+    ],
+  },
+  {
+    id: 'tools',
+    label: 'Herramientas',
+    icon: 'settings',
+    items: [
+      { key: 'croquis', label: 'Croquis Builder', implemented: true },
+    ],
+  },
 ];
 
 function ButtonShowcase() {
@@ -1382,6 +1443,106 @@ function HeaderShowcase() {
   );
 }
 
+function BreadcrumbsShowcase() {
+  const usageCode = `import { Breadcrumbs } from '@/components';
+
+// Breadcrumbs básico
+<Breadcrumbs
+  items={[
+    { label: 'Home', onClick: () => navigate('/') },
+    { label: 'Pólizas', onClick: () => navigate('/polizas') },
+    { label: 'Detalle' },
+  ]}
+/>
+
+// Con items activos
+<Breadcrumbs
+  items={[
+    { label: 'Inicio', onClick: () => console.log('Inicio') },
+    { label: 'Categorías', onClick: () => console.log('Categorías') },
+    { label: 'Actual', active: true },
+  ]}
+/>`;
+
+  return (
+    <div className={styles.componentShowcase}>
+      <h1 className={styles.componentTitle}>Breadcrumbs</h1>
+      <p className={styles.componentDescription}>
+        Navegación de migas de pan para mostrar la jerarquía de ubicación.
+      </p>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Ejemplo</h2>
+        <div className={styles.previewBox}>
+          <Breadcrumbs
+            items={[
+              { label: 'Home', onClick: () => console.log('Home') },
+              { label: 'Pólizas', onClick: () => console.log('Pólizas') },
+              { label: 'Detalle' },
+            ]}
+          />
+        </div>
+      </section>
+
+      <CodeBlock code={usageCode} />
+    </div>
+  );
+}
+
+
+
+function HeaderStepperShowcase() {
+  const usageCode = `import { HeaderStepper } from '@/components';
+
+// Stepper básico con pasos
+<HeaderStepper
+  items={[
+    { label: 'Datos Personales' },
+    { label: 'Información Vehicular', active: true },
+    { label: 'Cobertura' },
+    { label: 'Pago' },
+  ]}
+/>
+
+// Con iconos personalizados
+<HeaderStepper
+  items={[
+    { label: 'Inicio', icon: <Icon name="check-01" /> },
+    { label: 'Proceso', active: true, icon: <Icon name="clock-01" /> },
+    { label: 'Final', icon: <Icon name="star-01" /> },
+  ]}
+/>`;
+
+  return (
+    <div className={styles.componentShowcase}>
+      <h1 className={styles.componentTitle}>Header Stepper</h1>
+      <p className={styles.componentDescription}>
+        Indicador de progreso para flujos multi-paso en el header.
+      </p>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Ejemplo</h2>
+        <div className={styles.previewBox}>
+          <HeaderStepper
+            items={[
+              { label: 'Datos Personales' },
+              { label: 'Información Vehicular', active: true },
+              { label: 'Cobertura' },
+              { label: 'Pago' },
+            ]}
+          />
+        </div>
+      </section>
+
+      <CodeBlock code={usageCode} />
+    </div>
+  );
+}
+
+
+
+
+
 function AlertShowcase() {
   const usageCode = `import { AlertMessage } from '@/components';
 
@@ -1817,8 +1978,15 @@ export function DesignSystemShowcase() {
         return <BranchShowcase />;
       case 'croquis':
         return <CroquisShowcase />;
+      case 'breadcrumbs':
+        return <BreadcrumbsShowcase />;
+      case 'headerstepper':
+        return <HeaderStepperShowcase />;
       default:
-        return <PlaceholderShowcase name={menuItems.find(m => m.key === activeComponent)?.label || ''} />;
+        // Find label from all categories
+        const allItems = menuCategories.flatMap(cat => cat.items);
+        const item = allItems.find(m => m.key === activeComponent);
+        return <PlaceholderShowcase name={item?.label || ''} />;
     }
   };
 
@@ -1837,6 +2005,8 @@ export function DesignSystemShowcase() {
       'filter': 'search-01',
       'branch': 'user-profile-01',
       'croquis': 'edit-01',
+      'breadcrumbs': 'arrow-right',
+      'headerstepper': 'chevron-down',
     };
     return iconMap[key] || 'star-01';
   };
@@ -1852,18 +2022,25 @@ export function DesignSystemShowcase() {
           </div>
         }
       >
-        <MenuGroup>
-          {menuItems.map((item) => (
-            <MenuItem
-              key={item.key}
-              icon={<Icon name={getIconForComponent(item.key)} size={24} />}
-              active={activeComponent === item.key}
-              onClick={() => setActiveComponent(item.key)}
-              ariaLabel={item.label}
-              tooltip={item.label}
-            />
-          ))}
-        </MenuGroup>
+        {menuCategories.map((category) => (
+          <MenuAccordion
+            key={category.id}
+            title={category.label}
+            icon={<Icon name={category.icon} size={24} />}
+            defaultOpen={category.defaultOpen}
+          >
+            {category.items.map((item) => (
+              <MenuItem
+                key={item.key}
+                icon={<Icon name={getIconForComponent(item.key)} size={20} />}
+                active={activeComponent === item.key}
+                onClick={() => setActiveComponent(item.key)}
+                ariaLabel={item.label}
+                tooltip={item.label}
+              />
+            ))}
+          </MenuAccordion>
+        ))}
       </Sidebar>
       <main className={styles.main}>
         {renderContent()}

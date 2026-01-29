@@ -15,4 +15,5 @@ export * from './Icon';
 export * from './StepNumber';
 export * from './StepItem';
 export * from './MenuItem';
+export * from './MenuAccordion';
 export * from './Sidebar';
