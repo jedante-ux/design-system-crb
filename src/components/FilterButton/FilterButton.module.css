@@ -1,0 +1,70 @@
+/* Filter Group */
+.filterGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Filter Button */
+.filterButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #E6E8EC;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filterButton:hover {
+  border-color: #004EC9;
+  color: #004EC9;
+}
+
+/* Active State */
+.active {
+  background-color: #004EC9;
+  border-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.active:hover {
+  background-color: #585DE4;
+  border-color: #585DE4;
+  color: #FFFFFF;
+}
+
+/* Icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+/* Label */
+.label {
+  white-space: nowrap;
+}
+
+/* Count */
+.count {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #E6E8EC;
+  color: #525252;
+}
+
+.active .count {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}

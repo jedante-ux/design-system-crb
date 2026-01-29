@@ -1,0 +1,47 @@
+.accordion {
+  border: 1px solid #E6E8EC;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.header:hover {
+  background-color: #F5F5F5;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #262626;
+  transition: transform 0.2s ease;
+}
+
+.iconOpen {
+  transform: rotate(180deg);
+}
+
+.content {
+  padding: 20px;
+  border-top: 1px solid #E6E8EC;
+  background: #FAFAFA;
+}

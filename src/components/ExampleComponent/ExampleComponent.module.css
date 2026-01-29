@@ -1,0 +1,274 @@
+/* ============================================
+   ExampleComponent Styles
+   Siguiendo DESIGN_GUIDELINES.md
+   ============================================ */
+
+/* ===== BASE COMPONENT ===== */
+.component {
+  /* Layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* Typography - siguiendo sistema */
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+
+  /* Spacing - múltiplos de 4px */
+  padding: 10px 16px;
+
+  /* Borders */
+  border: none;
+  border-radius: 8px;
+
+  /* Colors - del sistema */
+  background-color: #004EC9;
+  color: #FFFFFF;
+
+  /* Interacción */
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+
+  /* Transiciones - 0.15s estándar */
+  transition: all 0.15s ease;
+
+  /* Sombra base */
+  box-shadow: none;
+}
+
+/* ===== VARIANTES DE COLOR ===== */
+
+/* Variante Primary (default) */
+.variantPrimary {
+  background-color: #004EC9;
+  color: #FFFFFF;
+  border: none;
+}
+
+.variantPrimary:hover:not(.disabled):not(.loading) {
+  background-color: #003A96;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 78, 201, 0.3);
+}
+
+.variantPrimary:active:not(.disabled):not(.loading) {
+  transform: translateY(0);
+}
+
+/* Variante Secondary */
+.variantSecondary {
+  background-color: #FFFFFF;
+  color: #525252;
+  border: 1px solid #E6E8EC;
+}
+
+.variantSecondary:hover:not(.disabled):not(.loading) {
+  border-color: #004EC9;
+  color: #004EC9;
+  background-color: #F0F7FF;
+  transform: translateY(-1px);
+}
+
+/* Variante Success */
+.variantSuccess {
+  background-color: #27AE60;
+  color: #FFFFFF;
+  border: none;
+}
+
+.variantSuccess:hover:not(.disabled):not(.loading) {
+  background-color: #1E8449;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+/* Variante Error */
+.variantError {
+  background-color: #DC2626;
+  color: #FFFFFF;
+  border: none;
+}
+
+.variantError:hover:not(.disabled):not(.loading) {
+  background-color: #B91C1C;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+/* ===== TAMAÑOS ===== */
+
+/* Small */
+.sizeSmall {
+  padding: 6px 10px;
+  font-size: 10px;
+  border-radius: 6px;
+  gap: 4px;
+}
+
+/* Medium (default) */
+.sizeMedium {
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+/* Large */
+.sizeLarge {
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+/* ===== ESTADOS ===== */
+
+/* Estado Activo */
+.active {
+  transform: scale(0.98);
+}
+
+.variantPrimary.active {
+  background-color: #003A96;
+}
+
+.variantSecondary.active {
+  background-color: #E8F1FC;
+  border-color: #004EC9;
+  color: #004EC9;
+}
+
+/* Estado Hovered */
+.hovered:not(.disabled):not(.loading) {
+  /* Los estilos específicos están en cada variante */
+}
+
+/* Estado Disabled */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+}
+
+/* Estado Loading */
+.loading {
+  cursor: wait;
+  pointer-events: none;
+  position: relative;
+}
+
+/* ===== ELEMENTOS INTERNOS ===== */
+
+/* Ícono */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sizeSmall .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.sizeLarge .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Contenido */
+.content {
+  flex: 1;
+  white-space: nowrap;
+}
+
+/* Loader */
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.variantSecondary .spinner {
+  border-color: rgba(0, 78, 201, 0.3);
+  border-top-color: #004EC9;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ripple Effect */
+.ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: rgba(255, 255, 255, 0.3);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* ===== FOCUS (Accesibilidad) ===== */
+.component:focus-visible {
+  outline: 2px solid #004EC9;
+  outline-offset: 2px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  /* Ajustes para móvil si es necesario */
+  .component {
+    min-width: 44px; /* Tamaño mínimo touch target */
+    min-height: 44px;
+  }
+}
+
+/* ===== UTILIDADES ===== */
+
+/* Full width */
+.fullWidth {
+  width: 100%;
+}
+
+/* Grupo de botones */
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.buttonGroup .component {
+  flex: 1;
+  min-width: max-content;
+}

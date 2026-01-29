@@ -1,0 +1,110 @@
+/* Button - Based on Figma Component */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.text {
+  display: inline-block;
+}
+
+.iconLeft,
+.iconRight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+/* Primary Variant */
+.primary {
+  background-color: #004EC9;
+  color: #FFFFFF;
+  border-color: #004EC9;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: #585DE4;
+  border-color: #585DE4;
+}
+
+.primary:focus:not(:disabled) {
+  background-color: #004EC9;
+  border-color: #004EC9;
+  outline: 2px solid #004EC9;
+  outline-offset: 2px;
+}
+
+.primary:disabled {
+  background-color: #BEBFC2;
+  border-color: #BEBFC2;
+  color: #E6E8EC;
+  cursor: not-allowed;
+}
+
+/* Secondary Variant */
+.secondary {
+  background-color: #FFFFFF;
+  color: #004EC9;
+  border-color: #004EC9;
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: #585DE4;
+  border-color: #585DE4;
+  color: #FFFFFF;
+}
+
+.secondary:focus:not(:disabled) {
+  background-color: #FFFFFF;
+  border-color: #004EC9;
+  color: #004EC9;
+  outline: 2px solid #004EC9;
+  outline-offset: 2px;
+}
+
+.secondary:disabled {
+  background-color: #FFFFFF;
+  border-color: #BEBFC2;
+  color: #BEBFC2;
+  cursor: not-allowed;
+}
+
+/* Ghost Variant */
+.ghost {
+  background-color: transparent;
+  color: #004EC9;
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: #585DE4;
+  color: #FFFFFF;
+}
+
+.ghost:focus:not(:disabled) {
+  background-color: transparent;
+  border-color: #004EC9;
+  color: #004EC9;
+  outline: 2px solid #004EC9;
+  outline-offset: 2px;
+}
+
+.ghost:disabled {
+  background-color: transparent;
+  border-color: #BEBFC2;
+  color: #BEBFC2;
+  cursor: not-allowed;
+}

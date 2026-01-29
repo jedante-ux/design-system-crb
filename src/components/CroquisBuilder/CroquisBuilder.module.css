@@ -1,0 +1,716 @@
+/* Container - Layout vertical 4:5 */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4 / 5;
+  border: 1px solid #E6E8EC;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+/* Street Selector - ARRIBA */
+.streetSelector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid #E6E8EC;
+  gap: 6px;
+  border-radius: 12px 12px 0 0;
+}
+
+.streetOptions {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+}
+
+.streetOption {
+  flex: 1;
+  padding: 6px 2px;
+  border: 1px solid #E6E8EC;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.streetOption:hover {
+  border-color: #004EC9;
+  color: #004EC9;
+}
+
+.streetOptionActive {
+  background-color: #004EC9;
+  border-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.streetOptionActive:hover {
+  background-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.clearBtn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #737373;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.clearBtn:hover {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+/* Canvas Wrapper - CENTRO */
+.canvasWrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #F0F7FF;
+  cursor: pointer;
+}
+
+.canvasHint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #525252;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+  background-color: #FFFFFF;
+  padding: 20px 28px;
+  border-radius: 12px;
+  border: 1px solid #E6E8EC;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.canvasHintIcon {
+  flex-shrink: 0;
+}
+
+.canvasWrapper:hover .canvasHint {
+  opacity: 1;
+}
+
+.streetPattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.streetSvg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* Road Styles - Fondo blanco con líneas azules */
+.road {
+  position: absolute;
+  background-color: #FFFFFF;
+}
+
+.roadHorizontal {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 110px;
+  transform: translateY(-50%);
+  border-top: 2px solid #004EC9;
+  border-bottom: 2px solid #004EC9;
+}
+
+.roadHorizontal::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #004EC9 0px,
+    #004EC9 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateY(-50%);
+}
+
+.roadVertical {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 110px;
+  transform: translateX(-50%);
+  border-left: 2px solid #004EC9;
+  border-right: 2px solid #004EC9;
+}
+
+.roadVertical::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    #004EC9 0px,
+    #004EC9 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateX(-50%);
+}
+
+.roadVerticalHalf {
+  top: 50%;
+  bottom: 0;
+  left: 50%;
+  width: 110px;
+  transform: translateX(-50%);
+  border-left: 2px solid #004EC9;
+  border-right: 2px solid #004EC9;
+}
+
+.roadVerticalHalf::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    #004EC9 0px,
+    #004EC9 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateX(-50%);
+}
+
+.roadCurve {
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: transparent;
+  border: 55px solid #FFFFFF;
+  box-shadow: inset 0 0 0 2px #004EC9, 0 0 0 2px #004EC9;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%);
+}
+
+/* Y-Junction - Intersección en Y */
+.roadFromTop {
+  top: 0;
+  bottom: 50%;
+  left: 50%;
+  width: 110px;
+  transform: translateX(-50%);
+  border-left: 2px solid #004EC9;
+  border-right: 2px solid #004EC9;
+}
+
+.roadDiagonalLeft {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110px;
+  height: 280px;
+  background-color: #FFFFFF;
+  border-left: 2px solid #004EC9;
+  border-right: 2px solid #004EC9;
+  transform-origin: top center;
+  transform: translateX(-50%) rotate(-35deg);
+}
+
+.roadDiagonalLeft::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    #004EC9 0px,
+    #004EC9 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateX(-50%);
+}
+
+.roadDiagonalRight {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110px;
+  height: 280px;
+  background-color: #FFFFFF;
+  border-left: 2px solid #004EC9;
+  border-right: 2px solid #004EC9;
+  transform-origin: top center;
+  transform: translateX(-50%) rotate(35deg);
+}
+
+.roadDiagonalRight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    #004EC9 0px,
+    #004EC9 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateX(-50%);
+}
+
+/* Glorieta - Roundabout */
+.roundabout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 170px;
+  height: 170px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #F0F7FF;
+  border: 34px solid #FFFFFF;
+  box-shadow: inset 0 0 0 2px #004EC9, 0 0 0 2px #004EC9;
+  z-index: 5;
+}
+
+.roundabout::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #E8F4FD;
+  border: 2px solid #004EC9;
+}
+
+/* Placed Elements - Vista cenital */
+.placedElement {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  transition: filter 0.15s ease;
+  z-index: 20;
+}
+
+.placedElement:hover {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.placedElement.dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  z-index: 100;
+}
+
+.elementActions {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.placedElement:hover .elementActions {
+  opacity: 1;
+}
+
+.actionBtn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: #262626;
+  color: #FFFFFF;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+}
+
+.actionBtn:hover {
+  background-color: #004EC9;
+}
+
+.deleteBtn:hover {
+  background-color: #EF4444;
+}
+
+.rotateBtn {
+  cursor: grab;
+}
+
+.rotateBtn:hover {
+  background-color: #004EC9;
+}
+
+.rotateBtn:active,
+.rotating {
+  cursor: grabbing;
+  background-color: #004EC9;
+  transform: scale(1.1);
+}
+
+/* Elements Bar - ABAJO */
+.elementsBar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  background-color: #FAFAFA;
+  border-top: 1px solid #E6E8EC;
+  position: relative;
+  z-index: 10;
+}
+
+.elementButtonWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.elementButton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border: 1px solid #E6E8EC;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.elementButton:hover {
+  border-color: #004EC9;
+  background-color: #F0F7FF;
+}
+
+.elementButtonActive {
+  border-color: #004EC9;
+  background-color: #E8F1FC;
+  box-shadow: inset 0 0 0 1px #004EC9;
+}
+
+.elementButton:active {
+  transform: scale(0.98);
+}
+
+.elementButtonIcon {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elementButtonLabel {
+  font-family: 'Poppins', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #525252;
+}
+
+/* Owner Dropdown */
+.ownerDropdown {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid #E6E8EC;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+.ownerDropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #FFFFFF;
+}
+
+.ownerDropdown::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #E6E8EC;
+}
+
+.ownerOption {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ownerOptionNA {
+  background-color: #E8F1FC;
+  color: #004EC9;
+}
+
+.ownerOptionNA:hover {
+  background-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.ownerOptionTercero {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+.ownerOptionTercero:hover {
+  background-color: #DC2626;
+  color: #FFFFFF;
+}
+
+/* Owner Tag - NA / 3ero */
+.ownerTag {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.placedElement:hover .ownerTag,
+.placedElement.selected .ownerTag {
+  opacity: 1;
+}
+
+.ownerTagNA {
+  background-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.ownerTagTercero {
+  background-color: #DC2626;
+  color: #FFFFFF;
+}
+
+.selected {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Placeholder View */
+.placeholderView {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: #FAFAFA;
+  border-radius: 0 0 12px 12px;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.placeholderView.fadeOut {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Builder Content */
+.builderContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.builderContent.fadeIn {
+  opacity: 0;
+  transform: scale(1.02);
+}
+
+.builderContent.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.placeholderIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.placeholderText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #525252;
+  margin: 0;
+  text-align: center;
+}
+
+.createCroquisBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: #004EC9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.createCroquisBtn:hover {
+  background-color: #003A96;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 78, 201, 0.3);
+}
+
+.createCroquisBtn:active {
+  transform: translateY(0);
+}
+
+/* Actions Bar - FOOTER */
+.actionsBar {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: #FAFAFA;
+  border-top: 1px solid #E6E8EC;
+  border-radius: 0 0 12px 12px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #E6E8EC;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelBtn:hover {
+  border-color: #DC2626;
+  color: #DC2626;
+  background-color: #FEF2F2;
+}
+
+.generateBtn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #004EC9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.generateBtn:hover {
+  background-color: #003A96;
+}

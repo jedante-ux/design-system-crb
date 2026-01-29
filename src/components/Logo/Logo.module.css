@@ -1,0 +1,32 @@
+/* ============================================
+   Logo Component Styles
+   Siguiendo DESIGN_GUIDELINES.md
+   ============================================ */
+
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+}
+
+/* Logo clickeable */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+.clickable:active {
+  transform: scale(0.98);
+}
+
+/* Focus para accesibilidad (cuando se usa como botón) */
+.logo:focus-visible {
+  outline: 2px solid #004EC9;
+  outline-offset: 4px;
+  border-radius: 8px;
+}

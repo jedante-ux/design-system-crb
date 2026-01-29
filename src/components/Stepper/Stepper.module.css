@@ -1,0 +1,100 @@
+/* Stepper Container */
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Step */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.step:disabled {
+  cursor: default;
+}
+
+/* Step Number */
+.stepNumber {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* Step Label */
+.stepLabel {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* Connector */
+.connector {
+  width: 40px;
+  height: 2px;
+  background-color: #E6E8EC;
+  margin: 0 4px;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.connectorCompleted {
+  background-color: #004EC9;
+}
+
+/* Status: Completed */
+.completed .stepNumber {
+  background-color: #004EC9;
+  color: #FFFFFF;
+}
+
+.completed .stepLabel {
+  color: #004EC9;
+}
+
+.completed:hover .stepNumber {
+  background-color: #585DE4;
+}
+
+/* Status: Active */
+.active .stepNumber {
+  background-color: #004EC9;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(0, 78, 201, 0.2);
+}
+
+.active .stepLabel {
+  color: #262626;
+  font-weight: 600;
+}
+
+/* Status: Pending */
+.pending .stepNumber {
+  background-color: #E6E8EC;
+  color: #737373;
+}
+
+.pending .stepLabel {
+  color: #737373;
+}

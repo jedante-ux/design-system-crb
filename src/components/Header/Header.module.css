@@ -1,0 +1,80 @@
+/* Header Container */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E8EC;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Variants */
+.simple {
+  padding: 12px 24px;
+}
+
+.with-stepper {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Left Section */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Back Button */
+.backButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #E6E8EC;
+  border-radius: 8px;
+  background: transparent;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.backButton:hover {
+  background-color: #F5F5F5;
+  color: #262626;
+}
+
+/* Title Group */
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #737373;
+}
+
+/* Center Section */
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

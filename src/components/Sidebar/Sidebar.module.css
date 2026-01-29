@@ -1,0 +1,42 @@
+.sidebar {
+  width: 108px;
+  min-width: 108px;
+  height: 100vh;
+  background-color: #FFFFFF;
+  border-right: 1px solid #E6E8EC;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  gap: 48px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  z-index: 100;
+}
+
+.logoContainer {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.menuGroup {
+  background-color: #FAFAFA;
+  border-radius: 16px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: fit-content;
+}
