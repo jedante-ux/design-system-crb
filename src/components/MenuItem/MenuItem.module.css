@@ -77,3 +77,60 @@
 .menuItem:hover .tooltip {
   opacity: 1;
 }
+
+/* Flyout variant */
+.flyoutItem {
+  width: 100%;
+  min-width: 180px;
+  height: auto;
+  min-height: 40px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+.flyoutItem:hover {
+  background-color: #F0F7FF;
+  opacity: 1;
+}
+
+.flyoutItem.active {
+  background-color: #F0F7FF;
+  border: none;
+}
+
+.flyoutItem .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.flyoutItem .icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #202236;
+  text-align: left;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.flyoutItem.active .label {
+  font-weight: 600;
+  color: #004EC9;
+}
+
+.flyoutItem .tooltip {
+  display: none;
+}

@@ -67,7 +67,6 @@ interface MenuCategory {
   id: string;
   label: string;
   icon: IconName;
-  defaultOpen?: boolean;
   items: NavMenuItem[];
 }
 
@@ -76,7 +75,6 @@ const menuCategories: MenuCategory[] = [
     id: 'fundamentals',
     label: 'Fundamentos',
     icon: 'file',
-    defaultOpen: true,
     items: [
       { key: 'guidelines', label: 'Design Guidelines', implemented: true },
       { key: 'colors', label: 'Color Palette', implemented: true },
@@ -2027,16 +2025,17 @@ export function DesignSystemShowcase() {
             key={category.id}
             title={category.label}
             icon={<Icon name={category.icon} size={24} />}
-            defaultOpen={category.defaultOpen}
+            
           >
             {category.items.map((item) => (
               <MenuItem
                 key={item.key}
                 icon={<Icon name={getIconForComponent(item.key)} size={20} />}
+                label={item.label}
+                variant="flyout"
                 active={activeComponent === item.key}
                 onClick={() => setActiveComponent(item.key)}
                 ariaLabel={item.label}
-                tooltip={item.label}
               />
             ))}
           </MenuAccordion>

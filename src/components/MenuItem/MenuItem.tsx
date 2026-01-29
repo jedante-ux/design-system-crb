@@ -12,6 +12,10 @@ export interface MenuItemProps {
   ariaLabel?: string;
   /** Tooltip text to show on hover */
   tooltip?: string;
+  /** Label to show next to icon (for flyout variant) */
+  label?: string;
+  /** Variant: 'sidebar' (icon only) or 'flyout' (icon + label) */
+  variant?: 'sidebar' | 'flyout';
   /** Optional className */
   className?: string;
 }
@@ -34,10 +38,13 @@ export function MenuItem({
   onClick,
   ariaLabel,
   tooltip,
+  label,
+  variant = 'sidebar',
   className = '',
 }: MenuItemProps) {
   const classNames = [
     styles.menuItem,
+    variant === 'flyout' && styles.flyoutItem,
     active && styles.active,
     className,
   ].filter(Boolean).join(' ');
@@ -52,7 +59,8 @@ export function MenuItem({
       data-tooltip={tooltip}
     >
       <span className={styles.icon}>{icon}</span>
-      {tooltip && <span className={styles.tooltip}>{tooltip}</span>}
+      {variant === 'flyout' && label && <span className={styles.label}>{label}</span>}
+      {variant === 'sidebar' && tooltip && <span className={styles.tooltip}>{tooltip}</span>}
     </button>
   );
 }
