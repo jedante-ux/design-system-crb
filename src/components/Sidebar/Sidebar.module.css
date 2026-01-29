@@ -1,12 +1,12 @@
 .sidebar {
-  width: 108px;
-  min-width: 108px;
+  width: 92px;
+  min-width: 92px;
   height: 100vh;
   background-color: #FFFFFF;
   border-right: 1px solid #E6E8EC;
   display: flex;
   flex-direction: column;
-  padding: 24px 16px;
+  padding: 24px 12px;
   gap: 48px;
   position: fixed;
   top: 0;
