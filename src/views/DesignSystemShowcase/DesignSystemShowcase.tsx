@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Button,
+  Input,
   CroquisBuilder,
   Stepper,
   AlertMessage,
@@ -66,7 +67,7 @@ const menuItems: NavMenuItem[] = [
   { key: 'colors', label: 'Color Palette', implemented: true },
   { key: 'logo', label: 'Logo', implemented: true },
   { key: 'icon', label: 'Icon', implemented: true },
-  { key: 'button', label: 'Button', implemented: true },
+  { key: 'button', label: 'Buttons & Inputs', implemented: true },
   { key: 'navbar', label: 'Navbar', implemented: true },
   { key: 'stepper', label: 'Stepper', implemented: true },
   { key: 'header', label: 'Header', implemented: true },
@@ -77,7 +78,7 @@ const menuItems: NavMenuItem[] = [
 ];
 
 function ButtonShowcase() {
-  const usageCode = `import { Button } from '@/components';
+  const buttonUsageCode = `import { Button, Icon } from '@/components';
 
 // Primary button
 <Button variant="primary" onClick={() => console.log('clicked')}>
@@ -112,12 +113,58 @@ function ButtonShowcase() {
   Descargar
 </Button>`;
 
+  const inputUsageCode = `import { Input, Icon } from '@/components';
+
+// Basic input
+<Input placeholder="Escribe aquí..." />
+
+// With label
+<Input label="Nombre completo" placeholder="Juan Pérez" />
+
+// With icons
+<Input
+  label="Buscar"
+  placeholder="Buscar..."
+  iconLeft={<Icon name="search-01" />}
+/>
+
+<Input
+  placeholder="Correo electrónico"
+  iconRight={<Icon name="mail-01" />}
+/>
+
+// With error
+<Input
+  label="Email"
+  placeholder="tu@email.com"
+  error={true}
+  errorMessage="Email inválido"
+/>
+
+// With helper text
+<Input
+  label="Contraseña"
+  type="password"
+  helperText="Mínimo 8 caracteres"
+/>
+
+// Disabled
+<Input label="Campo deshabilitado" placeholder="No editable" disabled />`;
+
   return (
     <div className={styles.componentShowcase}>
-      <h1 className={styles.componentTitle}>Button</h1>
+      <h1 className={styles.componentTitle}>Buttons & Inputs</h1>
       <p className={styles.componentDescription}>
-        Componente de boton interactivo con multiples variantes y estados.
+        Componentes de interacción: botones con múltiples variantes y campos de entrada de texto.
       </p>
+
+      {/* BUTTONS SECTION */}
+      <div style={{ marginTop: '48px', marginBottom: '24px' }}>
+        <h2 className={styles.componentTitle} style={{ fontSize: '24px', marginBottom: '16px' }}>Buttons</h2>
+        <p className={styles.componentDescription}>
+          Botones interactivos con variantes Primary, Secondary y Ghost
+        </p>
+      </div>
 
       <section className={styles.variantSection}>
         <h2 className={styles.sectionTitle}>Primary</h2>
@@ -193,7 +240,81 @@ function ButtonShowcase() {
         </div>
       </section>
 
-      <CodeBlock code={usageCode} />
+      <CodeBlock code={buttonUsageCode} title="Uso de Buttons" />
+
+      {/* INPUTS SECTION */}
+      <div style={{ marginTop: '64px', marginBottom: '24px' }}>
+        <h2 className={styles.componentTitle} style={{ fontSize: '24px', marginBottom: '16px' }}>Inputs</h2>
+        <p className={styles.componentDescription}>
+          Campos de entrada de texto con labels, iconos y estados de error
+        </p>
+      </div>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Básico</h2>
+        <div className={styles.previewBox}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
+            <Input placeholder="Placeholder" />
+            <Input label="Label" placeholder="Placeholder" />
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Con Iconos</h2>
+        <div className={styles.previewBox}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
+            <Input
+              label="Con icono izquierdo"
+              placeholder="Buscar..."
+              iconLeft={<Icon name="search-01" />}
+            />
+            <Input
+              label="Con icono derecho"
+              placeholder="Correo electrónico"
+              iconRight={<Icon name="mail-01" />}
+            />
+            <Input
+              label="Ambos iconos"
+              placeholder="Username"
+              iconLeft={<Icon name="user-profile-01" />}
+              iconRight={<Icon name="chevron-down" />}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Estados</h2>
+        <div className={styles.previewBox}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
+            <Input
+              label="Con valor"
+              placeholder="Placeholder"
+              defaultValue="Text filled"
+            />
+            <Input
+              label="Con helper text"
+              placeholder="Contraseña"
+              type="password"
+              helperText="Mínimo 8 caracteres"
+            />
+            <Input
+              label="Con error"
+              placeholder="email@example.com"
+              error={true}
+              errorMessage="Email inválido"
+            />
+            <Input
+              label="Deshabilitado"
+              placeholder="No editable"
+              disabled
+            />
+          </div>
+        </div>
+      </section>
+
+      <CodeBlock code={inputUsageCode} title="Uso de Inputs" />
     </div>
   );
 }
