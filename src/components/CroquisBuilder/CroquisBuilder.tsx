@@ -580,11 +580,12 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
   };
 
   const handleElementSelect = (type: 'car' | 'truck' | 'motorcycle' | 'pedestrian') => {
-    // Pedestrians are added directly without owner selection
-    if (type === 'pedestrian') {
+    // Pedestrians and motorcycles are added directly as "tercero" without owner selection
+    if (type === 'pedestrian' || type === 'motorcycle') {
       const newElement: PlacedElement = {
         id: `${type}-${Date.now()}`,
         type,
+        owner: 'tercero',
         x: 150 + Math.random() * 100,
         y: 180 + Math.random() * 100,
         rotation: 0,
@@ -681,56 +682,116 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
 
       switch (element.type) {
         case 'car':
+          // Vista cenital realista de carro
           return `
             <g transform="${transform}">
-              <g transform="translate(-20, -32)">
-                <rect x="4" y="10" width="32" height="52" rx="6" fill="${color}"/>
-                <rect x="6" y="4" width="28" height="14" rx="4" fill="${color}"/>
-                <rect x="6" y="2" width="8" height="4" rx="1.5" fill="#FFEB3B"/>
-                <rect x="26" y="2" width="8" height="4" rx="1.5" fill="#FFEB3B"/>
-                <rect x="8" y="18" width="24" height="14" rx="2" fill="#87CEEB" opacity="0.7"/>
-                <rect x="6" y="54" width="28" height="12" rx="4" fill="${color}"/>
-                <rect x="6" y="64" width="6" height="3" rx="1" fill="#EF4444"/>
-                <rect x="28" y="64" width="6" height="3" rx="1" fill="#EF4444"/>
+              <g transform="translate(-18, -28)">
+                <!-- Cuerpo principal del carro -->
+                <ellipse cx="18" cy="28" rx="16" ry="24" fill="${color}"/>
+                <!-- Contorno más oscuro -->
+                <ellipse cx="18" cy="28" rx="16" ry="24" fill="none" stroke="${darkerColor}" stroke-width="2"/>
+
+                <!-- Parabrisas delantero -->
+                <ellipse cx="18" cy="12" rx="12" ry="8" fill="#333333" opacity="0.7"/>
+
+                <!-- Parabrisas trasero -->
+                <ellipse cx="18" cy="44" rx="12" ry="8" fill="#333333" opacity="0.7"/>
+
+                <!-- Ventanas laterales (centro) -->
+                <rect x="6" y="22" width="24" height="12" rx="2" fill="#333333" opacity="0.5"/>
+
+                <!-- Espejo izquierdo -->
+                <rect x="2" y="20" width="4" height="6" rx="2" fill="${darkerColor}"/>
+
+                <!-- Espejo derecho -->
+                <rect x="30" y="20" width="4" height="6" rx="2" fill="${darkerColor}"/>
+
+                <!-- Luces traseras -->
+                <ellipse cx="8" cy="50" rx="3" ry="2" fill="#DC2626"/>
+                <ellipse cx="28" cy="50" rx="3" ry="2" fill="#DC2626"/>
+
+                <!-- Luces delanteras -->
+                <ellipse cx="8" cy="6" rx="3" ry="2" fill="#FDE047"/>
+                <ellipse cx="28" cy="6" rx="3" ry="2" fill="#FDE047"/>
               </g>
             </g>
           `;
         case 'truck':
+          // Vista cenital de camión/truck
           return `
             <g transform="${transform}">
-              <g transform="translate(-22, -44)">
-                <rect x="6" y="4" width="32" height="26" rx="4" fill="${color}"/>
-                <rect x="6" y="2" width="8" height="4" rx="1.5" fill="#FFEB3B"/>
-                <rect x="30" y="2" width="8" height="4" rx="1.5" fill="#FFEB3B"/>
-                <rect x="2" y="34" width="40" height="50" rx="2" fill="${color}" opacity="0.9"/>
-                <rect x="4" y="82" width="8" height="4" rx="1" fill="#EF4444"/>
-                <rect x="32" y="82" width="8" height="4" rx="1" fill="#EF4444"/>
+              <g transform="translate(-20, -36)">
+                <!-- Cabina del camión -->
+                <rect x="6" y="4" width="28" height="20" rx="4" fill="${color}"/>
+                <rect x="6" y="4" width="28" height="20" rx="4" fill="none" stroke="${darkerColor}" stroke-width="2"/>
+
+                <!-- Parabrisas cabina -->
+                <rect x="10" y="8" width="20" height="10" rx="2" fill="#333333" opacity="0.7"/>
+
+                <!-- Espejos cabina -->
+                <rect x="2" y="12" width="4" height="6" rx="2" fill="${darkerColor}"/>
+                <rect x="34" y="12" width="4" height="6" rx="2" fill="${darkerColor}"/>
+
+                <!-- Caja/cargo del camión -->
+                <rect x="4" y="26" width="32" height="40" rx="3" fill="${color}" opacity="0.95"/>
+                <rect x="4" y="26" width="32" height="40" rx="3" fill="none" stroke="${darkerColor}" stroke-width="2"/>
+
+                <!-- Luces delanteras -->
+                <rect x="8" y="2" width="6" height="3" rx="1" fill="#FDE047"/>
+                <rect x="26" y="2" width="6" height="3" rx="1" fill="#FDE047"/>
+
+                <!-- Luces traseras -->
+                <rect x="8" y="66" width="6" height="4" rx="1" fill="#DC2626"/>
+                <rect x="26" y="66" width="6" height="4" rx="1" fill="#DC2626"/>
               </g>
             </g>
           `;
         case 'motorcycle':
+          // Vista cenital de motocicleta
           return `
             <g transform="${transform}">
-              <g transform="translate(-7, -27)">
-                <ellipse cx="12" cy="6" rx="5" ry="6" fill="#333"/>
-                <circle cx="12" cy="2" r="2" fill="#FFEB3B"/>
-                <rect x="10" y="10" width="4" height="8" fill="${color}"/>
-                <ellipse cx="12" cy="22" rx="6" ry="5" fill="${color}"/>
-                <ellipse cx="12" cy="34" rx="5" ry="8" fill="#333"/>
-                <ellipse cx="12" cy="52" rx="5" ry="6" fill="#333"/>
-                <rect x="9" y="56" width="6" height="2" rx="1" fill="#EF4444"/>
+              <g transform="translate(-10, -24)">
+                <!-- Rueda delantera -->
+                <ellipse cx="10" cy="6" rx="6" ry="4" fill="#1F2937"/>
+                <ellipse cx="10" cy="6" rx="4" ry="2.5" fill="#374151"/>
+
+                <!-- Horquilla y manubrio -->
+                <rect x="8" y="10" width="4" height="8" rx="1" fill="${darkerColor}"/>
+                <rect x="4" y="10" width="12" height="2" rx="1" fill="${darkerColor}"/>
+
+                <!-- Tanque y asiento -->
+                <ellipse cx="10" cy="24" rx="7" ry="10" fill="${color}"/>
+                <ellipse cx="10" cy="24" rx="5" ry="8" fill="${darkerColor}" opacity="0.3"/>
+
+                <!-- Conductor (vista desde arriba) -->
+                <circle cx="10" cy="20" r="4" fill="#4B5563"/>
+
+                <!-- Rueda trasera -->
+                <ellipse cx="10" cy="42" rx="6" ry="4" fill="#1F2937"/>
+                <ellipse cx="10" cy="42" rx="4" ry="2.5" fill="#374151"/>
+
+                <!-- Luz trasera -->
+                <rect x="8" y="45" width="4" height="2" rx="1" fill="#DC2626"/>
+
+                <!-- Luz delantera -->
+                <ellipse cx="10" cy="4" rx="2" ry="1.5" fill="#FDE047"/>
               </g>
             </g>
           `;
         case 'pedestrian':
+          // Vista cenital (desde arriba) de una persona
           return `
             <g transform="${transform}">
-              <g transform="translate(-16, -24)">
-                <ellipse cx="16" cy="24" rx="7" ry="9" fill="${color}"/>
-                <ellipse cx="16" cy="18" rx="9" ry="4" fill="${color}"/>
-                <circle cx="16" cy="10" r="7" fill="${color}"/>
-                <ellipse cx="12" cy="34" rx="3" ry="4" fill="${darkerColor}"/>
-                <ellipse cx="20" cy="36" rx="3" ry="4" fill="${darkerColor}"/>
+              <g transform="translate(-12, -16)">
+                <!-- Cabeza -->
+                <circle cx="12" cy="8" r="6" fill="${color}"/>
+                <!-- Cuerpo/torso -->
+                <ellipse cx="12" cy="18" rx="8" ry="6" fill="${color}"/>
+                <!-- Brazos extendidos -->
+                <ellipse cx="12" cy="18" rx="14" ry="4" fill="${darkerColor}" opacity="0.8"/>
+                <!-- Piernas -->
+                <ellipse cx="10" cy="26" rx="3" ry="5" fill="${darkerColor}"/>
+                <ellipse cx="14" cy="26" rx="3" ry="5" fill="${darkerColor}"/>
               </g>
             </g>
           `;
@@ -739,7 +800,45 @@ export function CroquisBuilder({ onCancel, onGenerate }: CroquisBuilderProps = {
       }
     };
 
-    const elementsSvg = elements.map(el => getVehicleSvg(el)).join('');
+    // Generate label for each element
+    const getElementLabel = (element: PlacedElement): string => {
+      let labelText = '';
+
+      if (element.type === 'pedestrian') {
+        labelText = 'Peatón';
+      } else if (element.owner === 'na') {
+        labelText = 'NA';
+      } else if (element.owner === 'tercero') {
+        labelText = '3ero';
+      }
+
+      if (!labelText) return '';
+
+      // Position label above the element
+      const labelX = element.x;
+      const labelY = element.y - 40;
+
+      return `
+        <g>
+          <!-- Background rect for label -->
+          <rect x="${labelX - 20}" y="${labelY - 10}" width="40" height="20" rx="4" fill="#202236" opacity="0.9"/>
+          <!-- Label text -->
+          <text x="${labelX}" y="${labelY + 3}"
+                font-family="Poppins, sans-serif"
+                font-size="12"
+                font-weight="600"
+                fill="#FFFFFF"
+                text-anchor="middle">
+            ${labelText}
+          </text>
+        </g>
+      `;
+    };
+
+    const elementsSvg = elements.map(el => `
+      ${getVehicleSvg(el)}
+      ${getElementLabel(el)}
+    `).join('');
 
     const svgContent = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
