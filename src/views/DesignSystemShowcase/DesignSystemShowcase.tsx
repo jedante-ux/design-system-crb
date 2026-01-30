@@ -25,8 +25,10 @@ import {
   MenuItem,
   MenuAccordion,
   GalleryImage,
+  GalleryModal,
 } from '../../components';
 import type { IconName } from '../../components/Icon/Icon';
+import type { GalleryItem } from '../../components/GalleryModal/GalleryModal';
 import styles from './DesignSystemShowcase.module.css';
 
 interface CodeBlockProps {
@@ -56,7 +58,7 @@ function CodeBlock({ code, title = 'Usage' }: CodeBlockProps) {
   );
 }
 
-type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch' | 'breadcrumbs' | 'headerstepper' | 'galleryimage';
+type ComponentKey = 'guidelines' | 'colors' | 'logo' | 'icon' | 'button' | 'navbar' | 'croquis' | 'stepper' | 'alert' | 'header' | 'filter' | 'branch' | 'breadcrumbs' | 'headerstepper' | 'galleryimage' | 'gallerymodal';
 
 interface NavMenuItem {
   key: ComponentKey;
@@ -141,6 +143,7 @@ const menuCategories: MenuCategory[] = [
     icon: 'eye-open',
     items: [
       { key: 'galleryimage', label: 'Gallery Image', implemented: true },
+      { key: 'gallerymodal', label: 'Gallery Modal', implemented: true },
     ],
   },
 ];
@@ -2070,6 +2073,165 @@ function GalleryImageShowcase() {
   );
 }
 
+function GalleryModalShowcase() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentModalType, setCurrentModalType] = useState<'images' | 'mixed'>('images');
+
+  const usageCode = `import { GalleryModal } from '@/components';
+import type { GalleryItem } from '@/components';
+
+// Define gallery items
+const galleryItems: GalleryItem[] = [
+  {
+    id: '1',
+    type: 'image',
+    url: 'https://example.com/image1.jpg',
+    thumbnail: 'https://example.com/thumb1.jpg',
+    name: 'Lado Izquierdo',
+  },
+  {
+    id: '2',
+    type: 'image',
+    url: 'https://example.com/image2.jpg',
+    name: 'Lado Derecho',
+  },
+  {
+    id: '3',
+    type: 'pdf',
+    url: 'https://example.com/document.pdf',
+    name: 'Document.pdf',
+  },
+];
+
+// Use the modal
+const [isOpen, setIsOpen] = useState(false);
+
+<Button onClick={() => setIsOpen(true)}>
+  Ver Galería
+</Button>
+
+<GalleryModal
+  items={galleryItems}
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  initialIndex={0}
+  title="Documentos de vehículo y reparación"
+/>`;
+
+  const imageItems: GalleryItem[] = [
+    {
+      id: '1',
+      type: 'image',
+      url: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      thumbnail: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      name: 'Lado Izquierdo',
+    },
+    {
+      id: '2',
+      type: 'image',
+      url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      thumbnail: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      name: 'Lado Derecho',
+    },
+    {
+      id: '3',
+      type: 'image',
+      url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      thumbnail: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      name: 'Parte Frontal',
+    },
+  ];
+
+  const mixedItems: GalleryItem[] = [
+    {
+      id: '1',
+      type: 'image',
+      url: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      name: 'Foto del Vehículo',
+    },
+    {
+      id: '2',
+      type: 'pdf',
+      url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      name: 'Documento de Registro.pdf',
+    },
+    {
+      id: '3',
+      type: 'image',
+      url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      name: 'Identificación',
+    },
+  ];
+
+  const handleOpenModal = (type: 'images' | 'mixed') => {
+    setCurrentModalType(type);
+    setIsOpen(true);
+  };
+
+  return (
+    <div className={styles.componentShowcase}>
+      <h1 className={styles.componentTitle}>Gallery Modal</h1>
+      <p className={styles.componentDescription}>
+        Modal para visualizar galerías de imágenes y documentos PDF con navegación, zoom, rotación y controles.
+        Incluye thumbnails navegables y funcionalidad completa de visor de PDFs.
+        Basado en el componente "modal" de Figma.
+      </p>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Galería de Imágenes</h2>
+        <p className={styles.sectionDescription}>Modal con solo imágenes y navegación</p>
+        <div className={styles.previewBox}>
+          <Button variant="primary" onClick={() => handleOpenModal('images')}>
+            Abrir Galería de Imágenes
+          </Button>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Galería Mixta</h2>
+        <p className={styles.sectionDescription}>Modal con imágenes y documentos PDF</p>
+        <div className={styles.previewBox}>
+          <Button variant="primary" onClick={() => handleOpenModal('mixed')}>
+            Abrir Galería Mixta (Imágenes + PDF)
+          </Button>
+        </div>
+      </section>
+
+      <section className={styles.variantSection}>
+        <h2 className={styles.sectionTitle}>Características</h2>
+        <div className={styles.featureList}>
+          <div className={styles.feature}>
+            <strong>Navegación:</strong> Flechas laterales para navegar entre items, thumbnails clicables
+          </div>
+          <div className={styles.feature}>
+            <strong>Visor de Imágenes:</strong> Visualización optimizada con tamaño máximo responsive
+          </div>
+          <div className={styles.feature}>
+            <strong>Visor de PDF:</strong> Controles completos de navegación de páginas, zoom (50%-200%), rotación
+          </div>
+          <div className={styles.feature}>
+            <strong>Acciones:</strong> Descargar y imprimir documentos directamente desde el modal
+          </div>
+          <div className={styles.feature}>
+            <strong>Responsive:</strong> Se adapta a diferentes tamaños de pantalla
+          </div>
+        </div>
+      </section>
+
+      <CodeBlock code={usageCode} />
+
+      {/* Render the modal */}
+      <GalleryModal
+        items={currentModalType === 'images' ? imageItems : mixedItems}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        initialIndex={0}
+        title="Documentos de vehículo y reparación"
+      />
+    </div>
+  );
+}
+
 export function DesignSystemShowcase() {
   const [activeComponent, setActiveComponent] = useState<ComponentKey>('guidelines');
 
@@ -2105,6 +2267,8 @@ export function DesignSystemShowcase() {
         return <HeaderStepperShowcase />;
       case 'galleryimage':
         return <GalleryImageShowcase />;
+      case 'gallerymodal':
+        return <GalleryModalShowcase />;
       default:
         // Find label from all categories
         const allItems = menuCategories.flatMap(cat => cat.items);
@@ -2131,6 +2295,7 @@ export function DesignSystemShowcase() {
       'breadcrumbs': 'arrow-right',
       'headerstepper': 'chevron-down',
       'galleryimage': 'eye-open',
+      'gallerymodal': 'eye-open',
     };
     return iconMap[key] || 'star-01';
   };
