@@ -11,7 +11,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  overflow: visible;
+  overflow: hidden;
   z-index: 100;
 }
 
@@ -29,6 +29,26 @@
   flex-direction: column;
   gap: 16px;
   flex: 1;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding-right: 4px;
+}
+
+.menuContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menuContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menuContainer::-webkit-scrollbar-thumb {
+  background: #E6E8EC;
+  border-radius: 2px;
+}
+
+.menuContainer::-webkit-scrollbar-thumb:hover {
+  background: #D1D5DB;
 }
 
 .menuGroup {
