@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useState } from 'react';
-import styles from './Accordion.module.css';
+import styles from './Accordion.module.scss';
 
 export interface AccordionProps {
   title: string;

@@ -1,4 +1,4 @@
-import styles from './Stepper.module.css';
+import styles from './Stepper.module.scss';
 
 export interface StepperProps {
   steps: string[];

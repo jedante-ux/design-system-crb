@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './AlertMessage.module.css';
+import styles from './AlertMessage.module.scss';
 
 export interface AlertMessageProps {
   variant?: 'info' | 'success' | 'warning' | 'error';

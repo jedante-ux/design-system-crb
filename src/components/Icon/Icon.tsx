@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import styles from './Icon.module.css';
+import styles from './Icon.module.scss';
 
 export type IconName =
   | 'check-01'

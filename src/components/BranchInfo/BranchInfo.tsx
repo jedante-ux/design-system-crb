@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './BranchInfo.module.css';
+import styles from './BranchInfo.module.scss';
 
 export interface BranchInfoProps {
   title: string;

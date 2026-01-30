@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './Sidebar.module.css';
+import styles from './Sidebar.module.scss';
 
 export interface SidebarProps {
   /** Logo element (56x56px recommended) */

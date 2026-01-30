@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 export interface HeaderProps {
   title: string;

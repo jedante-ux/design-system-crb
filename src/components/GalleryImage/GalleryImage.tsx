@@ -1,7 +1,7 @@
 // Re-export type from here if circular dep issues, but actually I defined type here first.
 // Let's keep it simple.
 
-import styles from './GalleryImage.module.css';
+import styles from './GalleryImage.module.scss';
 import { Icon } from '../Icon';
 
 export type GalleryImageStatus =

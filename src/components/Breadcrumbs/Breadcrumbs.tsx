@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './Breadcrumbs.module.css';
+import styles from './Breadcrumbs.module.scss';
 
 export interface BreadcrumbItem {
   label: string;

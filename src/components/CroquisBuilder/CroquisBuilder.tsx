@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
-import styles from './CroquisBuilder.module.css';
+import styles from './CroquisBuilder.module.scss';
 
 type StreetType = 'cruz' | 'recta' | 't-junction' | 'y-junction' | 'glorieta' | 'curva';
 type ElementOwner = 'na' | 'tercero';

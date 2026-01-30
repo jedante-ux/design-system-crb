@@ -2,7 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { DesignSystemShowcase } from './views';
 import { Button } from './components';
 import { colors } from './tokens';
-import './App.css';
+import './App.scss';
 
 function Home() {
   return (

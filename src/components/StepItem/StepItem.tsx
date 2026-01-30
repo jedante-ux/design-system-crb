@@ -1,5 +1,5 @@
 import { StepNumber } from '../StepNumber';
-import styles from './StepItem.module.css';
+import styles from './StepItem.module.scss';
 
 export interface StepItemProps {
   /** Step number (1-9) */

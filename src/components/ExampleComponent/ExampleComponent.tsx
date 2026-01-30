@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import styles from './ExampleComponent.module.css';
+import styles from './ExampleComponent.module.scss';
 
 /**
  * Variantes visuales del componente

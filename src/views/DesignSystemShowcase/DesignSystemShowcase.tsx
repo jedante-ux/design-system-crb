@@ -29,7 +29,7 @@ import {
 } from '../../components';
 import type { IconName } from '../../components/Icon/Icon';
 import type { GalleryItem } from '../../components/GalleryModal/GalleryModal';
-import styles from './DesignSystemShowcase.module.css';
+import styles from './DesignSystemShowcase.module.scss';
 
 interface CodeBlockProps {
   code: string;
@@ -81,13 +81,6 @@ const menuCategories: MenuCategory[] = [
     items: [
       { key: 'guidelines', label: 'Design Guidelines', implemented: true },
       { key: 'colors', label: 'Color Palette', implemented: true },
-    ],
-  },
-  {
-    id: 'branding',
-    label: 'Branding',
-    icon: 'star-01',
-    items: [
       { key: 'logo', label: 'Logo', implemented: true },
       { key: 'icon', label: 'Icon', implemented: true },
     ],
@@ -810,6 +803,23 @@ function ColorSwatch({ name, hex, description, background }: ColorSwatchProps) {
 }
 
 function GuidelinesShowcase() {
+  const [isSkillsModalOpen, setIsSkillsModalOpen] = useState(false);
+  const [mdContent, setMdContent] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleOpenSkillsModal = async () => {
+    setIsSkillsModalOpen(true);
+    setIsLoading(true);
+    try {
+      const response = await fetch('/DESIGN_GUIDELINES.md');
+      const text = await response.text();
+      setMdContent(text);
+    } catch (error) {
+      setMdContent('Error al cargar el archivo.');
+    }
+    setIsLoading(false);
+  };
+
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = '/DESIGN_GUIDELINES.md';
@@ -833,16 +843,132 @@ function GuidelinesShowcase() {
             Sistema completo de directrices de diseño para el desarrollo de componentes Crabi.
             <br />
             <span style={{ color: '#737373', fontSize: '13px' }}>Versión 1.0.0 • Última actualización: 2026-01-28</span>
+            <br />
+            <span style={{ color: '#737373', fontSize: '13px' }}>Autores: Jose Ochoa y Stalin Bistochett</span>
+            <br />
+            <span style={{ color: '#737373', fontSize: '13px' }}>Tecnologías: Figma • React 19 • TypeScript • Vite • Sass</span>
           </p>
         </div>
         <Button
           variant="primary"
-          iconLeft={<Icon name="download" size={20} />}
-          onClick={handleDownload}
+          iconLeft={<Icon name="file" size={20} />}
+          onClick={handleOpenSkillsModal}
         >
-          Descargar Completo
+          Skills y Rules
         </Button>
       </div>
+
+      {/* Skills y Rules Modal */}
+      {isSkillsModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(32, 34, 54, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 10000,
+          padding: '24px',
+        }}>
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '16px',
+            width: '100%',
+            maxWidth: '800px',
+            maxHeight: '80vh',
+            display: 'flex',
+            flexDirection: 'column',
+            boxShadow: '0 24px 48px rgba(0, 0, 0, 0.24)',
+          }}>
+            {/* Modal Header */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '20px 24px',
+              borderBottom: '1px solid #E6E8EC',
+            }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 600, color: '#202236' }}>
+                Skills y Rules
+              </h2>
+              <button
+                onClick={() => setIsSkillsModalOpen(false)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Icon name="x-01" size={20} />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div style={{
+              flex: 1,
+              overflow: 'auto',
+              padding: '24px',
+              backgroundColor: '#F7F9FC',
+            }}>
+              {isLoading ? (
+                <div style={{ textAlign: 'center', padding: '40px', color: '#737373' }}>
+                  Cargando...
+                </div>
+              ) : (
+                <pre style={{
+                  margin: 0,
+                  padding: '20px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '8px',
+                  border: '1px solid #E6E8EC',
+                  fontSize: '13px',
+                  lineHeight: '1.6',
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  fontFamily: 'monospace',
+                  color: '#202236',
+                  maxHeight: '100%',
+                  overflow: 'auto',
+                }}>
+                  {mdContent}
+                </pre>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              gap: '12px',
+              padding: '16px 24px',
+              borderTop: '1px solid #E6E8EC',
+            }}>
+              <Button
+                variant="secondary"
+                onClick={() => setIsSkillsModalOpen(false)}
+              >
+                Cancelar
+              </Button>
+              <Button
+                variant="primary"
+                iconLeft={<Icon name="download" size={20} />}
+                onClick={handleDownload}
+              >
+                Descargar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quick Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px' }}>

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './HeaderStepper.module.css';
+import styles from './HeaderStepper.module.scss';
 
 export interface HeaderStepperItem {
   label: string;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Icon } from '../Icon';
-import styles from './GalleryModal.module.css';
+import styles from './GalleryModal.module.scss';
 
 export type GalleryItem = {
   id: string;

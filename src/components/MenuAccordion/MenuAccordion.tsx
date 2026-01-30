@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, type ReactNode } from 'react';
-import styles from './MenuAccordion.module.css';
+import styles from './MenuAccordion.module.scss';
 
 export interface MenuAccordionProps {
   /** Accordion title */
@@ -27,7 +27,7 @@ export function MenuAccordion({
       const rect = buttonRef.current.getBoundingClientRect();
       setPosition({
         top: rect.top,
-        left: rect.right + 12,
+        left: rect.right + 4,
       });
     }
   }, [isOpen]);

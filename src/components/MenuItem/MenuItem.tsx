@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './MenuItem.module.css';
+import styles from './MenuItem.module.scss';
 
 export interface MenuItemProps {
   /** Icon to display (24x24px recommended) */
