@@ -2122,22 +2122,22 @@ const [isOpen, setIsOpen] = useState(false);
     {
       id: '1',
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      thumbnail: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      url: 'https://via.placeholder.com/800x600/0066FF/FFFFFF?text=Lado+Izquierdo',
+      thumbnail: 'https://via.placeholder.com/200x150/0066FF/FFFFFF?text=Lado+Izquierdo',
       name: 'Lado Izquierdo',
     },
     {
       id: '2',
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      thumbnail: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Lado+Derecho',
+      thumbnail: 'https://via.placeholder.com/200x150/FF6B6B/FFFFFF?text=Lado+Derecho',
       name: 'Lado Derecho',
     },
     {
       id: '3',
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      thumbnail: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+      url: 'https://via.placeholder.com/800x600/4ECDC4/FFFFFF?text=Parte+Frontal',
+      thumbnail: 'https://via.placeholder.com/200x150/4ECDC4/FFFFFF?text=Parte+Frontal',
       name: 'Parte Frontal',
     },
   ];
@@ -2146,19 +2146,19 @@ const [isOpen, setIsOpen] = useState(false);
     {
       id: '1',
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      url: 'https://via.placeholder.com/800x600/0066FF/FFFFFF?text=Foto+Vehiculo',
       name: 'Foto del Vehículo',
     },
     {
       id: '2',
       type: 'pdf',
-      url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      name: 'Documento de Registro.pdf',
+      url: 'https://react.dev/images/home/conf2021/cover.svg',
+      name: 'React Documentation.pdf',
     },
     {
       id: '3',
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Identificacion',
       name: 'Identificación',
     },
   ];
