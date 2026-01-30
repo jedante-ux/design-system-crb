@@ -1960,6 +1960,59 @@ function PlaceholderShowcase({ name }: { name: string }) {
 }
 
 function GalleryImageShowcase() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const galleryImages: GalleryItem[] = [
+    {
+      id: '1',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/17357832/pexels-photo-17357832.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/17357832/pexels-photo-17357832.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Lado Izquierdo',
+    },
+    {
+      id: '2',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Nombre de foto',
+    },
+    {
+      id: '3',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Documento Frontal',
+    },
+    {
+      id: '4',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Foto Evidencia',
+    },
+    {
+      id: '5',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Documento Reverso',
+    },
+    {
+      id: '6',
+      type: 'image',
+      url: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
+      name: 'Tarjeta Circulación',
+    },
+  ];
+
+  const handleViewImage = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsModalOpen(true);
+  };
+
   const usageCode = `import { GalleryImage } from '@/components';
 
 // Small
@@ -1972,20 +2025,18 @@ function GalleryImageShowcase() {
 <GalleryImage status="high" src="image.jpg" />
 
 // With Cancel/Delete
-<GalleryImage 
-  status="small-cancel" 
-  src="image.jpg" 
-  onDelete={() => console.log('deleted')} 
+<GalleryImage
+  status="small-cancel"
+  src="image.jpg"
+  onDelete={() => console.log('deleted')}
 />
 
 // With View Action
-<GalleryImage 
-  status="medium" 
-  src="image.jpg" 
-  onView={() => console.log('view')} 
+<GalleryImage
+  status="medium"
+  src="image.jpg"
+  onView={() => console.log('view')}
 />`;
-
-  const placeholderImage = "https://images.unsplash.com/photo-1579353977828-2a4eab54c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80";
 
   return (
     <div className={styles.componentShowcase}>
@@ -2001,15 +2052,30 @@ function GalleryImageShowcase() {
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' }}>
             <div className={styles.previewItem}>
               <span className={styles.stateLabel}>Small (Status=small)</span>
-              <GalleryImage status="small" src={placeholderImage} label="Lado Izquierdo" />
+              <GalleryImage
+                status="small"
+                src={galleryImages[0].url}
+                label="Lado Izquierdo"
+                onView={() => handleViewImage(0)}
+              />
             </div>
             <div className={styles.previewItem}>
               <span className={styles.stateLabel}>Medium (Status=Medium)</span>
-              <GalleryImage status="medium" src={placeholderImage} label="Nombre de foto" />
+              <GalleryImage
+                status="medium"
+                src={galleryImages[1].url}
+                label="Nombre de foto"
+                onView={() => handleViewImage(1)}
+              />
             </div>
             <div className={styles.previewItem}>
               <span className={styles.stateLabel}>High (Status=High)</span>
-              <GalleryImage status="high" src={placeholderImage} label="Documento Frontal" />
+              <GalleryImage
+                status="high"
+                src={galleryImages[2].url}
+                label="Documento Frontal"
+                onView={() => handleViewImage(2)}
+              />
             </div>
           </div>
         </div>
@@ -2024,27 +2090,30 @@ function GalleryImageShowcase() {
               <span className={styles.stateLabel}>Small Cancel</span>
               <GalleryImage
                 status="small-cancel"
-                src={placeholderImage}
+                src={galleryImages[0].url}
                 label="Lado Izquierdo"
                 onDelete={() => alert('Delete clicked')}
+                onView={() => handleViewImage(0)}
               />
             </div>
             <div className={styles.previewItem}>
               <span className={styles.stateLabel}>Square Cancel</span>
               <GalleryImage
                 status="square-cancel"
-                src={placeholderImage}
+                src={galleryImages[3].url}
                 label="Foto Evidencia"
                 onDelete={() => alert('Delete clicked')}
+                onView={() => handleViewImage(3)}
               />
             </div>
             <div className={styles.previewItem}>
               <span className={styles.stateLabel}>High Cancel</span>
               <GalleryImage
                 status="high-cancel"
-                src={placeholderImage}
+                src={galleryImages[4].url}
                 label="Documento Reverso"
                 onDelete={() => alert('Delete clicked')}
+                onView={() => handleViewImage(4)}
               />
             </div>
           </div>
@@ -2059,9 +2128,9 @@ function GalleryImageShowcase() {
             <span className={styles.stateLabel}>With View Action</span>
             <GalleryImage
               status="medium"
-              src={placeholderImage}
+              src={galleryImages[5].url}
               label="Tarjeta Circulación"
-              onView={() => alert('View clicked')}
+              onView={() => handleViewImage(5)}
               onDelete={() => alert('Delete clicked')}
             />
           </div>
@@ -2069,6 +2138,15 @@ function GalleryImageShowcase() {
       </section>
 
       <CodeBlock code={usageCode} />
+
+      {/* Gallery Modal */}
+      <GalleryModal
+        items={galleryImages}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialIndex={selectedImageIndex}
+        title="Galería de Imágenes"
+      />
     </div>
   );
 }
