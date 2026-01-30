@@ -2122,22 +2122,22 @@ const [isOpen, setIsOpen] = useState(false);
     {
       id: '1',
       type: 'image',
-      url: 'https://via.placeholder.com/800x600/0066FF/FFFFFF?text=Lado+Izquierdo',
-      thumbnail: 'https://via.placeholder.com/200x150/0066FF/FFFFFF?text=Lado+Izquierdo',
+      url: 'https://images.pexels.com/photos/17357832/pexels-photo-17357832.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/17357832/pexels-photo-17357832.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       name: 'Lado Izquierdo',
     },
     {
       id: '2',
       type: 'image',
-      url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Lado+Derecho',
-      thumbnail: 'https://via.placeholder.com/200x150/FF6B6B/FFFFFF?text=Lado+Derecho',
+      url: 'https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       name: 'Lado Derecho',
     },
     {
       id: '3',
       type: 'image',
-      url: 'https://via.placeholder.com/800x600/4ECDC4/FFFFFF?text=Parte+Frontal',
-      thumbnail: 'https://via.placeholder.com/200x150/4ECDC4/FFFFFF?text=Parte+Frontal',
+      url: 'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      thumbnail: 'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg?auto=compress&cs=tinysrgb&w=300&h=200',
       name: 'Parte Frontal',
     },
   ];
@@ -2146,7 +2146,7 @@ const [isOpen, setIsOpen] = useState(false);
     {
       id: '1',
       type: 'image',
-      url: 'https://via.placeholder.com/800x600/0066FF/FFFFFF?text=Foto+Vehiculo',
+      url: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200',
       name: 'Foto del Vehículo',
     },
     {
@@ -2158,7 +2158,7 @@ const [isOpen, setIsOpen] = useState(false);
     {
       id: '3',
       type: 'image',
-      url: 'https://via.placeholder.com/800x600/FF6B6B/FFFFFF?text=Identificacion',
+      url: 'https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=1200',
       name: 'Identificación',
     },
   ];
